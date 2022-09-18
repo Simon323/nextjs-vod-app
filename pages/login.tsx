@@ -2,6 +2,7 @@ import Head from "next/head";
 import Image from "next/image";
 import { useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
+import useAuth from "../hooks/useAuth";
 
 interface Inputs {
   email: string;
@@ -10,6 +11,7 @@ interface Inputs {
 
 function Login() {
   const [login, setLogin] = useState<boolean>(false);
+  const { signIn, signUp } = useAuth();
 
   const {
     register,
@@ -18,7 +20,13 @@ function Login() {
     formState: { errors },
   } = useForm<Inputs>();
 
-  const onSubmit: SubmitHandler<Inputs> = (data) => console.log(data);
+  const onSubmit: SubmitHandler<Inputs> = async ({ email, password }) => {
+    if (login) {
+      await signIn(email, password);
+    } else {
+      await signUp(email, password);
+    }
+  };
 
   return (
     <div className="relative flex h-screen w-screen flex-col bg-black md:items-center md:justify-center md:bg-transparent">
@@ -74,12 +82,17 @@ function Login() {
         <button
           type="submit"
           className="w-full rounded bg-[#810511] py-3 font-semibold"
+          onClick={() => setLogin(true)}
         >
           Sign In
         </button>
         <div className="text-[gray]">
           New to VOD?{" "}
-          <button type="submit" className="text-white hover:underline">
+          <button
+            type="submit"
+            className="text-white hover:underline"
+            onClick={() => setLogin(false)}
+          >
             Sign up new
           </button>
         </div>
