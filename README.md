@@ -47,3 +47,13 @@ $ yarn add @mui/material @emotion/react @emotion/styled
 # install
 $ yarn add recoil
 ```
+
+## Player
+
+```bash
+# npm packages
+  - react-player
+
+# install
+$ yarn add react-player
+```
