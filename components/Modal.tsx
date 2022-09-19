@@ -20,8 +20,6 @@ function Modal() {
     setShowModal(false);
   };
 
-  console.log(movie);
-
   useEffect(() => {
     if (!movie) return;
 
@@ -72,7 +70,7 @@ function Modal() {
             playing
             muted={muted}
           />
-          <div className="absolute bottom-10 flex w-full items-center justify-between">
+          <div className="absolute bottom-10 flex w-full items-center justify-between px-10">
             <div className="flex space-x-2">
               <button className="flex items-center gap-x-2 rounded bg-white px-8 text-xl font-bold text-black transition hover:bg-[#e6e6e6]">
                 <FaPlay className="h-7 w-7 text-black" />
@@ -99,7 +97,7 @@ function Modal() {
           <div className="space-y-6 text-lg">
             <div className="flex items-center space-x-2 text-sm">
               <p className="font-semibold text-green-400">
-                {movie?.vote_average * 10}% Match
+                {(movie?.vote_average * 10).toFixed(0)}% Match
               </p>
               <p className="font-light">
                 {movie?.release_date || movie?.first_air_date}
@@ -108,12 +106,21 @@ function Modal() {
                 HD
               </div>
             </div>
-            <div>
+            <div className="flex flex-col gap-x-10 gap-y-4 font-light md:flex-row">
               <p className="w-5/6">{movie?.overview}</p>
               <div className="flex flex-col space-y-3 text-sm">
                 <div>
-                  <span className="text-[grey]">Genres:</span>
+                  <span className="text-[grey]">Genres: </span>
                   {genres.map((genre) => genre.name).join(", ")}
+                </div>
+                <div>
+                  <span className="text-[grey]">Original language: </span>
+                  {movie?.original_language}
+                </div>
+
+                <div>
+                  <span className="text-[grey]">Total votes: </span>
+                  {movie?.vote_count}
                 </div>
               </div>
             </div>
