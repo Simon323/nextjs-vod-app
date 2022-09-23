@@ -42,3 +42,5 @@ export interface Product {
 interface Price {
   unit_amount?: number | null;
 }
+
+export interface Subscription {}

@@ -11,6 +11,7 @@ import { useRecoilValue } from "recoil";
 import { modalState } from "../atoms/modalAtom";
 import Modal from "../components/Modal";
 import Plans from "../components/Plans";
+import useSubscription from "../hooks/useSubscription";
 
 interface Props {
   originals: Movie[];
@@ -35,9 +36,9 @@ const Home: NextPage<Props> = ({
   trendingNow,
   products,
 }: Props) => {
-  const { loading } = useAuth();
+  const { loading, user } = useAuth();
   const showModal = useRecoilValue(modalState);
-  const subscription = false;
+  const subscription = useSubscription(user);
 
   if (loading || subscription === null) {
     return <></>;
