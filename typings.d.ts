@@ -43,4 +43,6 @@ interface Price {
   unit_amount?: number | null;
 }
 
-export interface Subscription {}
+export interface Subscription {
+  created?: string;
+}
