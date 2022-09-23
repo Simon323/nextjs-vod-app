@@ -31,3 +31,14 @@ export interface Element {
     | "Trailer"
     | "Teaser";
 }
+
+export interface Product {
+  id: string;
+  name: string;
+  prices: Price[];
+  metadata: { [key: string]: string | number | null };
+}
+
+interface Price {
+  unit_amount?: number | null;
+}

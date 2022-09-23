@@ -1,10 +1,18 @@
 import { CheckIcon } from "@heroicons/react/24/solid";
 import Head from "next/head";
 import Link from "next/link";
+import { useState } from "react";
 import useAuth from "../hooks/useAuth";
+import { Product } from "../typings";
+import Table from "./Table";
 
-function Plans() {
+interface Props {
+  products: Product[];
+}
+
+function Plans({ products }: Props) {
   const { logout } = useAuth();
+  const [selectedPlan, setSelectedPlan] = useState<Product | null>(products[2]);
 
   return (
     <div>
@@ -49,14 +57,22 @@ function Plans() {
 
         <div className="mt-4 flex flex-col space-y-4">
           <div className="flex w-full items-center justify-end self-end md:w-3/5">
-            <div className="planBox">Standard</div>
-            <div className="planBox">Standard</div>
-            <div className="planBox">Standard</div>
+            {products.map((product) => (
+              <div
+                key={product.id}
+                className={`planBox ${
+                  selectedPlan?.id === product.id ? "opacity-100" : "opacity-60"
+                }`}
+                onClick={() => setSelectedPlan(product)}
+              >
+                {product.name}
+              </div>
+            ))}
           </div>
 
-          {/* TABLE */}
+          <Table products={products} selectedPlan={selectedPlan} />
 
-          {/* Button */}
+          <button>Subscribe</button>
         </div>
       </main>
     </div>

@@ -4,7 +4,7 @@ import Head from "next/head";
 import Header from "../components/Header";
 import Banner from "../components/Banner";
 import requests from "../utils/requests";
-import { Movie } from "../typings";
+import { Movie, Product } from "../typings";
 import Row from "../components/Row";
 import useAuth from "../hooks/useAuth";
 import { useRecoilValue } from "recoil";
@@ -21,6 +21,7 @@ interface Props {
   horrorMovies: Movie[];
   romanceMovies: Movie[];
   documentaries: Movie[];
+  products: Product[];
 }
 
 const Home: NextPage<Props> = ({
@@ -32,6 +33,7 @@ const Home: NextPage<Props> = ({
   romanceMovies,
   topRated,
   trendingNow,
+  products,
 }: Props) => {
   const { loading } = useAuth();
   const showModal = useRecoilValue(modalState);
@@ -41,7 +43,7 @@ const Home: NextPage<Props> = ({
     return <></>;
   }
 
-  if (!subscription) return <Plans />;
+  if (!subscription) return <Plans products={products} />;
 
   return (
     <div
@@ -74,6 +76,39 @@ const Home: NextPage<Props> = ({
 export default Home;
 
 export const getServerSideProps: GetServerSideProps = async () => {
+  const products: Product[] = [
+    {
+      id: "id_1",
+      name: "Basic",
+      prices: [{ unit_amount: 199 }],
+      metadata: {
+        videoQuality: "Weak",
+        resolution: "480p",
+        portability: "true",
+      },
+    },
+    {
+      id: "id_2",
+      name: "Standard",
+      prices: [{ unit_amount: 616 }],
+      metadata: {
+        videoQuality: "Good",
+        resolution: "720p",
+        portability: "true",
+      },
+    },
+    {
+      id: "id_3",
+      name: "Premium",
+      prices: [{ unit_amount: 2099 }],
+      metadata: {
+        videoQuality: "Best",
+        resolution: "1080p",
+        portability: "true",
+      },
+    },
+  ];
+
   const [
     originals,
     trendingNow,
@@ -104,6 +139,7 @@ export const getServerSideProps: GetServerSideProps = async () => {
       horrorMovies: horrorMovies.results,
       romanceMovies: romanceMovies.results,
       documentaries: documentaries.results,
+      products,
     },
   };
 };
