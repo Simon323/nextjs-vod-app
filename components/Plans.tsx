@@ -28,7 +28,7 @@ function Plans() {
           Sign Out
         </button>
       </header>
-      <main className="pt-28">
+      <main className="mx-auto max-w-5xl px-5 pt-28 pb-12 transition-all md:px-10">
         <h1 className="mb-3 text-3xl font-medium">
           Choose the plan that's right for you
         </h1>
@@ -43,15 +43,20 @@ function Plans() {
           </li>
           <li className="flex items-center gap-x-2 text-lg">
             <CheckIcon className="h-7 w-7 text-[#E50914]" /> Change or cancel
-            your plan anytime. Ad-free.
+            your plan anytime.
           </li>
         </ul>
+
         <div className="mt-4 flex flex-col space-y-4">
-          <div className="flex w-full items-center self-end md:w-3/5">
+          <div className="flex w-full items-center justify-end self-end md:w-3/5">
             <div className="planBox">Standard</div>
             <div className="planBox">Standard</div>
             <div className="planBox">Standard</div>
           </div>
+
+          {/* TABLE */}
+
+          {/* Button */}
         </div>
       </main>
     </div>
