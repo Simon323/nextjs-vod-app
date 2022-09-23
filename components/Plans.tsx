@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useState } from "react";
 import useAuth from "../hooks/useAuth";
 import { Product } from "../typings";
+import Loader from "./Loader";
 import Table from "./Table";
 
 interface Props {
@@ -11,8 +12,16 @@ interface Props {
 }
 
 function Plans({ products }: Props) {
-  const { logout } = useAuth();
+  const { logout, user } = useAuth();
   const [selectedPlan, setSelectedPlan] = useState<Product | null>(products[2]);
+  const [isBillingLoading, setIsBillingLoading] = useState<boolean>(false);
+
+  const subscribeToPlan = () => {
+    if (!user) return;
+
+    //TODO: loadCheckout
+    setIsBillingLoading(true);
+  };
 
   return (
     <div>
@@ -72,7 +81,19 @@ function Plans({ products }: Props) {
 
           <Table products={products} selectedPlan={selectedPlan} />
 
-          <button>Subscribe</button>
+          <button
+            disabled={!selectedPlan || isBillingLoading}
+            className={`mx-auto w-11/12 rounded bg-[#E50914] py-4 text-xl shadow hover:bg-[#f6121d] md:w-[420px] ${
+              isBillingLoading && "opacity-60"
+            }`}
+            onClick={subscribeToPlan}
+          >
+            {isBillingLoading ? (
+              <Loader color="dark:fill-gray-300" />
+            ) : (
+              "Subscribe"
+            )}
+          </button>
         </div>
       </main>
     </div>
