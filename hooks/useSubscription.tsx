@@ -8,7 +8,10 @@ function useSubscription(user: User | null) {
   useEffect(() => {
     if (!user) return;
 
-    setSubscription({ created: "Sat Sep 24 2022 00:23:25 GMT+0200" });
+    setSubscription({
+      created: "Sat Sep 24 2022 00:23:25 GMT+0200",
+      product: "id_1",
+    });
   }, [user]);
 
   return subscription;

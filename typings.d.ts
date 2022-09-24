@@ -45,4 +45,5 @@ interface Price {
 
 export interface Subscription {
   created?: string;
+  product?: string;
 }

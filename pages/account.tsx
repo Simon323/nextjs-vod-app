@@ -1,10 +1,16 @@
+import { GetStaticProps } from "next";
 import Head from "next/head";
 import Link from "next/link";
 import Membership from "../components/Membership";
 import useAuth from "../hooks/useAuth";
 import useSubscription from "../hooks/useSubscription";
+import { Product } from "../typings";
 
-function Account() {
+interface Props {
+  products: Product[];
+}
+
+function Account({ products }: Props) {
   const imgSrc =
     "https://avatars.githubusercontent.com/u/4273762?s=400&u=53ef9a998d8e51e3148aa05c66511b104ec9a78d&v=4";
   const { user } = useAuth();
@@ -34,8 +40,8 @@ function Account() {
           />
         </Link>
       </header>
-      <main className="pt-24">
-        <div>
+      <main className="pt-24 mx-auto max-w-6xl px-5 pb-12 transition-all md:px-10">
+        <div className="flex flex-col gap-x-4 md:flex-row md:items-center">
           <h1 className="text-3xl md:text-4xl">Account</h1>
           <div className="-ml-0.5 flex items-center gap-x-1.5">
             <img src={imgSrc} alt="" className="h-7 w-7" />
@@ -45,9 +51,16 @@ function Account() {
           </div>
         </div>
         <Membership />
-        <div>
+        <div className="mt-6 grid grid-cols-1 gap-x-4 border px-4 py-4 md:grid-cols-4 md:border-x-0 md:border-t md:border-b-0 md:px-0 md:pb-0">
           <h4>Plan Details</h4>
-          <div></div>
+          <div>
+            {
+              products.filter(
+                (product) => product.id === subscription?.product
+              )[0]?.name
+            }
+          </div>
+          <p>Change plan</p>
         </div>
       </main>
     </div>
@@ -55,3 +68,15 @@ function Account() {
 }
 
 export default Account;
+
+export const getStaticProps: GetStaticProps = async () => {
+  const products: Product[] = [
+    { id: "id_1", name: "Basic", prices: [{ unit_amount: 199 }], metadata: {} },
+  ];
+
+  return {
+    props: {
+      products,
+    },
+  };
+};
