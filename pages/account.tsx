@@ -13,7 +13,7 @@ interface Props {
 function Account({ products }: Props) {
   const imgSrc =
     "https://avatars.githubusercontent.com/u/4273762?s=400&u=53ef9a998d8e51e3148aa05c66511b104ec9a78d&v=4";
-  const { user } = useAuth();
+  const { user, logout } = useAuth();
   const subscription = useSubscription(user);
   return (
     <div>
@@ -60,7 +60,18 @@ function Account({ products }: Props) {
               )[0]?.name
             }
           </div>
-          <p>Change plan</p>
+          <p className="cursor-pointer text-blue-500 hover:underline md:text-right">
+            Change plan
+          </p>
+        </div>
+        <div className="mt-6 grid grid-cols-1 gap-x-4 border px-4 py-4 md:grid-cols-4 md:border-x-0 md:border-t md:border-b-0 md:px-0 md:pb-0">
+          <h4>Settings</h4>
+          <p
+            onClick={logout}
+            className="col-span-3 cursor-pointer text-blue-500 hover:underline"
+          >
+            Sing out of all devices
+          </p>
         </div>
       </main>
     </div>
