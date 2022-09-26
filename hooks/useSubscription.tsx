@@ -8,7 +8,12 @@ function useSubscription(user: User | null) {
   useEffect(() => {
     if (!user) return;
 
-    setSubscription({});
+    setSubscription({
+      created: "Sat Sep 24 2022 00:23:25 GMT+0200",
+      product: "id_1",
+      cancel_at_period_end: true,
+      current_period_end: "Sat Sep 24 2022 00:23:25 GMT+0200",
+    });
   }, [user]);
 
   return subscription;

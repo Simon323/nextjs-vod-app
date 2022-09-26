@@ -43,4 +43,9 @@ interface Price {
   unit_amount?: number | null;
 }
 
-export interface Subscription {}
+export interface Subscription {
+  created?: string;
+  product?: string;
+  cancel_at_period_end?: boolean;
+  current_period_end?: string;
+}
