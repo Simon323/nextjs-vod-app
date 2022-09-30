@@ -1,14 +1,11 @@
-# Next.js + Tailwind CSS Example
+# Next.js + Tailwind + Firebase = VOD App
 
-This example shows how to use [Tailwind CSS](https://tailwindcss.com/) [(v3.0)](https://tailwindcss.com/blog/tailwindcss-v3) with Next.js. It follows the steps outlined in the official [Tailwind docs](https://tailwindcss.com/docs/guides/nextjs).
+## Tailwind
 
-## Deploy your own
+- [Tailwind CSS](https://tailwindcss.com/) [(v3.0)](https://tailwindcss.com/blog/tailwindcss-v3)
+- [Tailwind docs](https://tailwindcss.com/docs/guides/nextjs)
 
-Deploy the example using [Vercel](https://vercel.com?utm_source=github&utm_medium=readme&utm_campaign=next-example) or preview live with [StackBlitz](https://stackblitz.com/github/vercel/next.js/tree/canary/examples/with-tailwindcss)
-
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/git/external?repository-url=https://github.com/vercel/next.js/tree/canary/examples/with-tailwindcss&project-name=with-tailwindcss&repository-name=with-tailwindcss)
-
-## How to use
+## Create from template
 
 Execute [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app) with [npm](https://docs.npmjs.com/cli/init), [Yarn](https://yarnpkg.com/lang/en/docs/cli/create/), or [pnpm](https://pnpm.io) to bootstrap the example:
 
@@ -24,7 +21,36 @@ yarn create next-app --example with-tailwindcss with-tailwindcss-app
 pnpm create next-app --example with-tailwindcss with-tailwindcss-app
 ```
 
-Deploy it to the cloud with [Vercel](https://vercel.com/new?utm_source=github&utm_medium=readme&utm_campaign=next-example) ([Documentation](https://nextjs.org/docs/deployment)).
+## Fix template
+
+1. Create file `.babelrc`
+
+   ```json
+   {
+     "presets": [
+       [
+         "next/babel",
+         {
+           "preset-react": {
+             "runtime": "automatic",
+             "importSource": "@emotion/react"
+           }
+         }
+       ]
+     ],
+     "plugins": ["xwind/babel", "@emotion/babel-plugin"]
+   }
+   ```
+
+2. In `next.config.js` add
+   ```js
+   module.exports = {
+     //... other config options
+     experimental: {
+       forceSwcTransforms: true,
+     },
+   };
+   ```
 
 ## Install MUI
 
@@ -57,3 +83,9 @@ $ yarn add recoil
 # install
 $ yarn add react-player
 ```
+
+## Deploy
+
+Deploy the example using [Vercel](https://vercel.com?utm_source=github&utm_medium=readme&utm_campaign=next-example) or preview live with [StackBlitz](https://stackblitz.com/github/vercel/next.js/tree/canary/examples/with-tailwindcss)
+
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/git/external?repository-url=https://github.com/vercel/next.js/tree/canary/examples/with-tailwindcss&project-name=with-tailwindcss&repository-name=with-tailwindcss)
